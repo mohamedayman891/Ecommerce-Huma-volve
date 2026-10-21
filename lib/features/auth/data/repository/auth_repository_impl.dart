@@ -13,12 +13,11 @@ class AuthRepositoryImpl extends AuthRepository {
 
   AuthRepositoryImpl(this._authRemoteDataSource, this._sharedPrefUtils);
 
-  ///This method will be used by UseCase
   @override
   Future<ApiResult<void>> login(LoginRequest request) async {
     var authResponse = await _authRemoteDataSource.login(request);
-    if (authResponse.isSuccess && authResponse.getData()?.token != null) {
-      await _sharedPrefUtils.saveToken(authResponse.getData()!.token!);
+    if (authResponse.isSuccess && authResponse.getData()?.accessToken != null) {
+      await _sharedPrefUtils.saveToken(authResponse.getData()!.accessToken!);
     }
     return authResponse;
   }
@@ -26,8 +25,8 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<ApiResult<void>> register(RegisterRequest request) async {
     var authResponse = await _authRemoteDataSource.register(request);
-    if (authResponse.isSuccess && authResponse.getData()?.token != null) {
-      await _sharedPrefUtils.saveToken(authResponse.getData()!.token!);
+    if (authResponse.isSuccess && authResponse.getData()?.accessToken != null) {
+      await _sharedPrefUtils.saveToken(authResponse.getData()!.accessToken!);
     }
     return authResponse;
   }

@@ -1,24 +1,51 @@
-import 'user.dart';
-
 class AuthResponse {
-  String? message;
-  User? user;
-  String? token;
+  int? id;
+  String? email;
+  String? password;
+  String? name;
+  String? role;
+  String? avatar;
+  String? creationAt;
+  String? updatedAt;
+  String? accessToken;
+  String? refreshToken;
 
-  AuthResponse({this.message, this.user, this.token});
+  AuthResponse({
+    this.id,
+    this.email,
+    this.password,
+    this.name,
+    this.role,
+    this.avatar,
+    this.creationAt,
+    this.updatedAt,
+    this.accessToken,
+    this.refreshToken,
+  });
 
-  AuthResponse.fromJson(dynamic json) {
-    message = json['message'];
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
-    token = json['token'];
+  AuthResponse.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    email = json['email'];
+    password = json['password'];
+    name = json['name'];
+    role = json['role'];
+    avatar = json['avatar'];
+    accessToken = json['access_token'];
+    refreshToken = json['refresh_token'];
   }
+
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['message'] = message;
-    if (user != null) {
-      map['user'] = user?.toJson();
-    }
-    map['token'] = token;
-    return map;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['email'] = email;
+    data['password'] = password;
+    data['name'] = name;
+    data['role'] = role;
+    data['avatar'] = avatar;
+    data['creationAt'] = creationAt;
+    data['updatedAt'] = updatedAt;
+    data['access_token'] = accessToken;
+    data['refresh_token'] = accessToken;
+    return data;
   }
 }

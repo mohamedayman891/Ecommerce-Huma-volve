@@ -7,9 +7,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 @module
 abstract class NetworkModule {
   Dio get dio {
-    var dio = Dio(
-      BaseOptions(baseUrl: 'https://ecommerce.routemisr.com/api/v1/'),
-    );
+    var dio = Dio(BaseOptions(baseUrl: 'https://api.escuelajs.co/api/v1/'));
     dio.interceptors.addAll([
       AuthInterceptor(),
       PrettyDioLogger(
@@ -32,7 +30,7 @@ class AuthInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     var prefs = getIt<SharedPrefUtils>();
-    options.headers.addAll({"token": await prefs.getToken()});
+    options.headers.addAll({"access_token": await prefs.getToken()});
     super.onRequest(options, handler);
   }
 }

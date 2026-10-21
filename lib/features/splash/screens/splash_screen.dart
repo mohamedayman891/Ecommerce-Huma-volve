@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme.dart';
-import '../../auth/login/screens/login_screen.dart';
+import '../../auth/ui/login/screens/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,7 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => const LoginScreen(),
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const LoginScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
           },
@@ -39,11 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.shopping_bag,
-              size: 120,
-              color: AppTheme.primary,
-            ),
+            Icon(Icons.shopping_bag, size: 120, color: AppTheme.primary),
             const SizedBox(height: 24),
             Text(
               'Huma-volve',
@@ -61,9 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             const SizedBox(height: 48),
-            CircularProgressIndicator(
-              color: AppTheme.primary,
-            ),
+            CircularProgressIndicator(color: AppTheme.primary),
           ],
         ),
       ),

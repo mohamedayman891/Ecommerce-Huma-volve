@@ -13,9 +13,9 @@ abstract class ApiServices {
   @factoryMethod
   factory ApiServices(Dio dio) = _ApiServices;
 
-  @POST('auth/signin')
+  @POST('auth/login')
   Future<AuthResponse> login(@Body() LoginRequest request);
 
-  @POST('auth/signup')
+  @POST('users')
   Future<AuthResponse> register(@Body() RegisterRequest request);
 }

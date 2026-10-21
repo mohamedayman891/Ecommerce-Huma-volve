@@ -1,12 +1,12 @@
 import 'package:ecommerce_app_huma_volve/core/di/di.dart';
 import 'package:ecommerce_app_huma_volve/core/widgets/helper_function.dart';
-import 'package:ecommerce_app_huma_volve/features/auth/sign_up/cubit/register_cubit.dart';
-import 'package:ecommerce_app_huma_volve/features/auth/sign_up/cubit/register_state.dart';
+import 'package:ecommerce_app_huma_volve/features/auth/ui/sign_up/cubit/register_cubit.dart';
+import 'package:ecommerce_app_huma_volve/features/auth/ui/sign_up/cubit/register_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/widgets/custom_text_field.dart';
-import '../../../../core/widgets/primary_button.dart';
-import '../../../../core/theme.dart';
+import '../../../../../core/widgets/custom_text_field.dart';
+import '../../../../../core/widgets/primary_button.dart';
+import '../../../../../core/theme.dart';
 import '../../login/screens/login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -21,14 +21,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late final TextEditingController nameController;
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
-  late final TextEditingController rePasswordController;
   final RegisterCubit cubit = getIt<RegisterCubit>();
   @override
   void initState() {
     nameController = TextEditingController();
     emailController = TextEditingController();
     passwordController = TextEditingController();
-    rePasswordController = TextEditingController();
     super.initState();
   }
 
@@ -37,7 +35,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
-    rePasswordController.dispose();
     super.dispose();
   }
 
@@ -124,13 +121,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return null;
                     },
                   ),
-                  const SizedBox(height: 20),
-                  CustomTextField(
-                    controller: rePasswordController,
-                    hintText: 'RePassword',
-                    prefixIcon: Icons.lock_outline,
-                    isPassword: true,
-                  ),
                   const SizedBox(height: 40),
                   buildSignUpButton(),
                   const SizedBox(height: 24),
@@ -192,10 +182,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               name: nameController.text,
               email: emailController.text,
               password: passwordController.text,
-              rePassword: rePasswordController.text,
-              phone: "01050028100",
+              role: "customer",
+              avatar: "https://i.imgur.com/LDOO4Qs.jpg",
             );
-            if (_formKey.currentState?.validate() ?? false) {
+            if (_formKey.currentState!.validate()) {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const LoginScreen()),

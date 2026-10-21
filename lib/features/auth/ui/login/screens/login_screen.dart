@@ -1,13 +1,13 @@
 import 'package:ecommerce_app_huma_volve/core/di/di.dart';
 import 'package:ecommerce_app_huma_volve/core/widgets/helper_function.dart';
-import 'package:ecommerce_app_huma_volve/features/auth/login/cubit/login_cubit.dart';
-import 'package:ecommerce_app_huma_volve/features/auth/login/cubit/login_state.dart';
+import 'package:ecommerce_app_huma_volve/features/auth/ui/login/cubit/login_cubit.dart';
+import 'package:ecommerce_app_huma_volve/features/auth/ui/login/cubit/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/widgets/custom_text_field.dart';
-import '../../../../core/widgets/primary_button.dart';
-import '../../../../core/theme.dart';
-import '../../../main_navigation/screens/main_navigation_screen.dart';
+import '../../../../../core/widgets/custom_text_field.dart';
+import '../../../../../core/widgets/primary_button.dart';
+import '../../../../../core/theme.dart';
+import '../../../../main_navigation/screens/main_navigation_screen.dart';
 import '../../sign_up/screens/sign_up_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -177,11 +177,11 @@ class _LoginScreenState extends State<LoginScreen> {
           isLoading: state.loginApi.isLoading,
           onPressed: () {
             cubit.login(emailController.text, passwordController.text);
-            if (_formKey.currentState?.validate() ?? false) {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => MainNavigationScreen()),
-              );
-            }
+            // if (_formKey.currentState?.validate() ?? false) {
+            //   Navigator.of(context).pushReplacement(
+            //     MaterialPageRoute(builder: (context) => MainNavigationScreen()),
+            //   );
+            // }
           },
         );
       },

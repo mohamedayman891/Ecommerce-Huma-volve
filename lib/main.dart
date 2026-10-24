@@ -6,11 +6,11 @@ import 'features/splash/screens/splash_screen.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
-  runApp(const MyApp());
+  runApp(const EcommerceHumaVolve());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class EcommerceHumaVolve extends StatelessWidget {
+  const EcommerceHumaVolve({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,3 +22,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// I added clean Architecture from start of the project

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/dummy_data.dart';
-import '../../../core/theme.dart';
+import '../../../core/utils/dummy_data.dart';
+import '../../../core/utils/theme.dart';
 import '../widgets/profile_menu_item.dart';
 import '../../auth/ui/login/screens/login_screen.dart';
 

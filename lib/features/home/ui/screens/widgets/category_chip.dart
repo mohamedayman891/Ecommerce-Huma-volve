@@ -1,14 +1,15 @@
+import 'package:ecommerce_app_huma_volve/features/home/domain/entity/category.dart';
 import 'package:flutter/material.dart';
-import '../../../core/theme.dart';
+import '../../../../../core/utils/theme.dart';
 
 class CategoryChip extends StatelessWidget {
-  final String label;
+  final Category category;
   final bool isSelected;
   final VoidCallback onTap;
 
   const CategoryChip({
     super.key,
-    required this.label,
+    required this.category,
     required this.isSelected,
     required this.onTap,
   });
@@ -21,12 +22,12 @@ class CategoryChip extends StatelessWidget {
         duration: const Duration(milliseconds: 300),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         decoration: BoxDecoration(
-          color: isSelected ? AppTheme.primary : Colors.white,
+          color: isSelected ? AppTheme.primary : AppTheme.surface,
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
             if (!isSelected)
               BoxShadow(
-                color: Colors.grey.withValues(alpha: 0.05),
+                color: AppTheme.grey.withValues(alpha: 0.05),
                 spreadRadius: 2,
                 blurRadius: 10,
                 offset: const Offset(0, 4),
@@ -41,9 +42,9 @@ class CategoryChip extends StatelessWidget {
           ],
         ),
         child: Text(
-          label,
+          category.name,
           style: TextStyle(
-            color: isSelected ? Colors.white : AppTheme.textSecondary,
+            color: isSelected ? AppTheme.surface : AppTheme.textSecondary,
             fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
           ),
         ),

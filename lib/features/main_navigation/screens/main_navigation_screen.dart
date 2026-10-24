@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme.dart';
-import '../../home/screens/home_screen.dart';
+import '../../../core/utils/theme.dart';
+import '../../home/ui/screens/home_screen.dart';
 import '../../cart/screens/cart_screen.dart';
 import '../../profile/screens/profile_screen.dart';
 
@@ -43,9 +43,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 _currentIndex = index;
               });
             },
-            backgroundColor: Colors.white,
+            backgroundColor: AppTheme.surface,
             selectedItemColor: AppTheme.primary,
-            unselectedItemColor: Colors.grey.shade400,
+            unselectedItemColor: AppTheme.grey.withValues(alpha: 0.4),
             showSelectedLabels: false,
             showUnselectedLabels: false,
             type: BottomNavigationBarType.fixed,

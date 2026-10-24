@@ -20,6 +20,8 @@ class Product {
   });
 }
 
+final List<Color> colors = [Colors.white, Colors.black, Colors.grey];
+final List<String> sizes = ['40', '41', '42', '43'];
 final dummyProducts = [
   Product(
     id: '1',

@@ -1,12 +1,11 @@
 import 'package:ecommerce_app_huma_volve/core/di/di.dart';
 import 'package:flutter/material.dart';
-import 'core/theme.dart';
+import 'core/utils/theme.dart';
 import 'features/splash/screens/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
-
   runApp(const MyApp());
 }
 

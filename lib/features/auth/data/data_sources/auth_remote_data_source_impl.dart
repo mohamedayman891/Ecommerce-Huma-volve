@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:ecommerce_app_huma_volve/core/api/api_result.dart';
 import 'package:ecommerce_app_huma_volve/core/api/api_services.dart';
 import 'package:ecommerce_app_huma_volve/core/api/handle_dio_error.dart';
-import 'package:ecommerce_app_huma_volve/core/model/auth/request/login_request.dart';
-import 'package:ecommerce_app_huma_volve/core/model/auth/request/register_request.dart';
-import 'package:ecommerce_app_huma_volve/core/model/auth/response/auth/auth_response.dart';
+import 'package:ecommerce_app_huma_volve/features/auth/data/model/auth/request/login_request.dart';
+import 'package:ecommerce_app_huma_volve/features/auth/data/model/auth/request/register_request.dart';
+import 'package:ecommerce_app_huma_volve/features/auth/data/model/auth/response/auth/auth_response.dart';
 import 'package:ecommerce_app_huma_volve/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:injectable/injectable.dart';
 

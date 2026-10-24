@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../core/widgets/primary_button.dart';
-import '../../../../../core/theme.dart';
+import '../../../../../core/utils/theme.dart';
 import '../../login/screens/login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -44,9 +44,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       bloc: cubit,
       listener: (context, state) {
         if (state.registerApi.isSuccess) {
-          showFlutterToast('account_created', Colors.green);
+          showFlutterToast('account_created', AppTheme.green);
         } else if (state.registerApi.isError) {
-          showFlutterToast(state.registerApi.errorMessage, Colors.red);
+          showFlutterToast(state.registerApi.errorMessage, AppTheme.accent);
         }
       },
       child: Scaffold(

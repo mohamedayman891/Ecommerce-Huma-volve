@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../core/widgets/primary_button.dart';
-import '../../../../../core/theme.dart';
+import '../../../../../core/utils/theme.dart';
 import '../../../../main_navigation/screens/main_navigation_screen.dart';
 import '../../sign_up/screens/sign_up_screen.dart';
 
@@ -24,8 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
   LoginCubit cubit = getIt();
   @override
   void initState() {
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
+    emailController = TextEditingController(text: "mohamed2810@gmail.com");
+    passwordController = TextEditingController(text: "28102005");
 
     super.initState();
   }
@@ -43,9 +43,9 @@ class _LoginScreenState extends State<LoginScreen> {
       bloc: cubit,
       listener: (context, state) {
         if (state.loginApi.isSuccess) {
-          showFlutterToast('success', Colors.green);
+          showFlutterToast('success', AppTheme.green);
         } else if (state.loginApi.isError) {
-          showFlutterToast(state.loginApi.errorMessage, Colors.red);
+          showFlutterToast(state.loginApi.errorMessage, AppTheme.accent);
         }
       },
       child: Scaffold(
@@ -177,11 +177,11 @@ class _LoginScreenState extends State<LoginScreen> {
           isLoading: state.loginApi.isLoading,
           onPressed: () {
             cubit.login(emailController.text, passwordController.text);
-            // if (_formKey.currentState?.validate() ?? false) {
-            //   Navigator.of(context).pushReplacement(
-            //     MaterialPageRoute(builder: (context) => MainNavigationScreen()),
-            //   );
-            // }
+            if (_formKey.currentState?.validate() ?? false) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => MainNavigationScreen()),
+              );
+            }
           },
         );
       },

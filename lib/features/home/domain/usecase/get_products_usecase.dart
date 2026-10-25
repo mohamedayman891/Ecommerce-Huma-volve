@@ -11,7 +11,11 @@ class GetProductsUseCase {
 
   Future<ApiResult<List<Product>>> call({
     String? category,
-    String? subCategory,
-  }) =>
-      _homeRepository.getProducts(category: category, subCategory: subCategory);
+    required int offset,
+    required int limit,
+  }) => _homeRepository.getProducts(
+    category: category,
+    offset: offset,
+    limit: limit,
+  );
 }

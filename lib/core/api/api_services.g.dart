@@ -77,9 +77,17 @@ class _ApiServices implements ApiServices {
   }
 
   @override
-  Future<List<ProductDM>> getProducts({String? category}) async {
+  Future<List<ProductDM>> getProducts({
+    String? category,
+    required int offset,
+    required int limit,
+  }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'categoryId': category};
+    final queryParameters = <String, dynamic>{
+      r'categoryId': category,
+      r'offset': offset,
+      r'limit': limit,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;

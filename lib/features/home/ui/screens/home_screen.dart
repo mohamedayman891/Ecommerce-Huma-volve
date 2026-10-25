@@ -21,11 +21,33 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeCubit cubit = getIt();
+  final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
+    _scrollController.addListener(_onScroll);
     cubit.getProducts();
     cubit.getCategories();
+  }
+
+  void _onScroll() {
+    if (!_scrollController.hasClients) return;
+    if (_scrollController.position.extentAfter < 400) {
+      _loadNextPage();
+    }
+  }
+
+  void _loadNextPage() {
+    cubit.loadMoreProducts();
+  }
+
+  @override
+  void dispose() {
+    _scrollController
+      ..removeListener(_onScroll)
+      ..dispose();
+    super.dispose();
   }
 
   @override
@@ -36,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
         create: (context) => cubit,
         child: SafeArea(
           child: CustomScrollView(
+            controller: _scrollController,
             slivers: [
               SliverToBoxAdapter(
                 child: Padding(
@@ -166,6 +189,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                 },
               ),
+              BlocBuilder<HomeCubit, HomeState>(
+                builder: (context, state) => buildPaginationFooter(state),
+              ),
               const SliverToBoxAdapter(child: SizedBox(height: 24)),
             ],
           ),
@@ -188,6 +214,33 @@ class _HomeScreenState extends State<HomeScreen> {
       }, childCount: product.length),
     ),
   );
+
+  Widget buildPaginationFooter(HomeState state) {
+    if (!state.productsApi.isSuccess ||
+        state.productsApi.data?.isEmpty != false) {
+      return const SliverToBoxAdapter(child: SizedBox.shrink());
+    }
+    if (state.isLoadingMoreProducts) {
+      return const SliverToBoxAdapter(
+        child: Padding(
+          padding: EdgeInsets.all(24),
+          child: Center(child: CircularProgressIndicator()),
+        ),
+      );
+    }
+    if (state.paginationError != null) {
+      return SliverToBoxAdapter(
+        child: Center(
+          child: TextButton(
+            onPressed: _loadNextPage,
+            child: const Text('Could not load more products. Tap to retry.'),
+          ),
+        ),
+      );
+    }
+    return const SliverToBoxAdapter(child: SizedBox.shrink());
+  }
+
   Widget buildCategories(
     List<Category> categories, {
     required String? selectedCategoryId,

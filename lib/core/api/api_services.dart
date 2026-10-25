@@ -22,7 +22,11 @@ abstract class ApiServices {
   Future<AuthResponse> register(@Body() RegisterRequest request);
 
   @GET('products')
-  Future<List<ProductDM>> getProducts({@Query("categoryId") String? category});
+  Future<List<ProductDM>> getProducts({
+    @Query("categoryId") String? category,
+    @Query("offset") required int offset,
+    @Query("limit") required int limit,
+  });
   @GET('categories')
   Future<List<CategoryDM>> getCategories();
 }

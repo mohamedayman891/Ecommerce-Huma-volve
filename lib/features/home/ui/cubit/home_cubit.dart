@@ -7,6 +7,8 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class HomeCubit extends Cubit<HomeState> {
+  static const int _pageSize = 10;
+
   final GetCategoriesUseCase _getCategoriesUseCase;
   final GetProductsUseCase _getProductsUseCase;
   int _productsCategoryId = 0;
@@ -39,20 +41,75 @@ class HomeCubit extends Cubit<HomeState> {
         productsApi: Resource.loading(),
         selectedCategoryId: category,
         resetSelectedCategory: category == null,
+        hasMoreProducts: true,
+        isLoadingMoreProducts: false,
+        clearPaginationError: true,
       ),
     );
-    final apiResult = await _getProductsUseCase.call(category: category);
+    final apiResult = await _getProductsUseCase.call(
+      category: category,
+      offset: 0,
+      limit: _pageSize,
+    );
     if (isClosed || categoryId != _productsCategoryId) return;
     if (apiResult.isSuccess) {
+      final products = apiResult.getData() ?? [];
       emit(
         state.copyWith(
-          productsApi: Resource.success(data: apiResult.getData()),
+          productsApi: Resource.success(data: products),
+          hasMoreProducts: products.length >= _pageSize,
         ),
       );
     } else {
       emit(
         state.copyWith(
           productsApi: Resource.error(errorMessage: apiResult.errorMessage),
+          hasMoreProducts: false,
+        ),
+      );
+    }
+  }
+
+  Future<void> loadMoreProducts({bool retry = false}) async {
+    if (isClosed ||
+        state.productsApi.isLoading ||
+        state.productsApi.isError ||
+        !state.hasMoreProducts ||
+        state.isLoadingMoreProducts ||
+        (state.paginationError != null && !retry)) {
+      return;
+    }
+
+    final categoryId = _productsCategoryId;
+    final currentProducts = state.productsApi.data ?? [];
+
+    emit(
+      state.copyWith(isLoadingMoreProducts: true, clearPaginationError: true),
+    );
+
+    final apiResult = await _getProductsUseCase.call(
+      category: state.selectedCategoryId,
+      offset: currentProducts.length,
+      limit: _pageSize,
+    );
+    if (isClosed || categoryId != _productsCategoryId) return;
+
+    if (apiResult.isSuccess) {
+      final nextPage = apiResult.getData() ?? [];
+      emit(
+        state.copyWith(
+          productsApi: Resource.success(
+            data: [...currentProducts, ...nextPage],
+          ),
+          hasMoreProducts: nextPage.length >= _pageSize,
+          isLoadingMoreProducts: false,
+        ),
+      );
+    } else {
+      emit(
+        state.copyWith(
+          isLoadingMoreProducts: false,
+          paginationError: apiResult.errorMessage,
         ),
       );
     }

@@ -5,7 +5,8 @@ import 'package:ecommerce_app_huma_volve/features/home/data/model/product_dm.dar
 abstract class HomeRemoteDataSource {
   Future<ApiResult<List<ProductDM>>> getProducts({
     String? category,
-    String? subCategory,
+    required int offset,
+    required int limit,
   });
   Future<ApiResult<List<CategoryDM>>> getCategories();
 }

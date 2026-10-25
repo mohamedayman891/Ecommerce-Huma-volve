@@ -7,15 +7,26 @@ class HomeState {
   late Resource<List<Product>> productsApi;
   final String searchQuery;
   final String? selectedCategoryId;
+  final bool hasMoreProducts;
+  final bool isLoadingMoreProducts;
+  final String? paginationError;
 
   HomeState({
     required this.categoriesApi,
     required this.productsApi,
     this.searchQuery = '',
     this.selectedCategoryId,
+    this.hasMoreProducts = true,
+    this.isLoadingMoreProducts = false,
+    this.paginationError,
   });
 
-  HomeState.initial() : searchQuery = '', selectedCategoryId = null {
+  HomeState.initial()
+    : searchQuery = '',
+      selectedCategoryId = null,
+      hasMoreProducts = true,
+      isLoadingMoreProducts = false,
+      paginationError = null {
     categoriesApi = Resource.initial();
     productsApi = Resource.initial();
   }
@@ -35,6 +46,10 @@ class HomeState {
     String? searchQuery,
     String? selectedCategoryId,
     bool resetSelectedCategory = false,
+    bool? hasMoreProducts,
+    bool? isLoadingMoreProducts,
+    String? paginationError,
+    bool clearPaginationError = false,
   }) {
     return HomeState(
       categoriesApi: categoriesApi ?? this.categoriesApi,
@@ -43,6 +58,12 @@ class HomeState {
       selectedCategoryId: resetSelectedCategory
           ? null
           : selectedCategoryId ?? this.selectedCategoryId,
+      hasMoreProducts: hasMoreProducts ?? this.hasMoreProducts,
+      isLoadingMoreProducts:
+          isLoadingMoreProducts ?? this.isLoadingMoreProducts,
+      paginationError: clearPaginationError
+          ? null
+          : paginationError ?? this.paginationError,
     );
   }
 }

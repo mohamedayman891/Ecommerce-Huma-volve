@@ -6,6 +6,7 @@ abstract class HomeRepository {
   Future<ApiResult<List<Category>>> getCategories();
   Future<ApiResult<List<Product>>> getProducts({
     required String? category,
-    String? subCategory,
+    required int offset,
+    required int limit,
   });
 }

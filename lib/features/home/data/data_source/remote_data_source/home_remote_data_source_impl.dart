@@ -28,10 +28,15 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   @override
   Future<ApiResult<List<ProductDM>>> getProducts({
     String? category,
-    String? subCategory,
+    required int offset,
+    required int limit,
   }) async {
     try {
-      var response = await _apiServices.getProducts(category: category);
+      var response = await _apiServices.getProducts(
+        category: category,
+        offset: offset,
+        limit: limit,
+      );
       return SuccessApiResult(data: response);
     } catch (e) {
       return handleApiErrors(e);

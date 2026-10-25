@@ -38,12 +38,14 @@ class HomeRepositoryImpl extends HomeRepository {
   @override
   Future<ApiResult<List<Product>>> getProducts({
     String? category,
-    String? subCategory,
+    required int offset,
+    required int limit,
   }) async {
     try {
       var apiResult = await _remoteDataSource.getProducts(
         category: category,
-        subCategory: subCategory,
+        offset: offset,
+        limit: limit,
       );
       if (apiResult.isSuccess) {
         return SuccessApiResult(

@@ -34,6 +34,8 @@ import '../../features/home/data/repository/home_repository_impl.dart' as _i9;
 import '../../features/home/domain/repository/home_repository.dart' as _i541;
 import '../../features/home/domain/usecase/get_categories_usecase.dart'
     as _i493;
+import '../../features/home/domain/usecase/get_product_by_id_usecase.dart'
+    as _i704;
 import '../../features/home/domain/usecase/get_products_usecase.dart' as _i271;
 import '../../features/home/ui/cubit/home_cubit.dart' as _i333;
 import '../api/api_services.dart' as _i124;
@@ -74,6 +76,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i271.GetProductsUseCase>(
       () => _i271.GetProductsUseCase(gh<_i541.HomeRepository>()),
+    );
+    gh.factory<_i704.GetProductByIdUseCase>(
+      () => _i704.GetProductByIdUseCase(gh<_i541.HomeRepository>()),
     );
     gh.factory<_i911.LoginUseCase>(
       () => _i911.LoginUseCase(gh<_i961.AuthRepository>()),

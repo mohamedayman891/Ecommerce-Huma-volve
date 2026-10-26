@@ -42,4 +42,14 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
       return handleApiErrors(e);
     }
   }
+
+  @override
+  Future<ApiResult<ProductDM>> getProductById(String id) async {
+    try {
+      final response = await _apiServices.getProductById(id);
+      return SuccessApiResult(data: response);
+    } catch (error) {
+      return handleApiErrors(error);
+    }
+  }
 }

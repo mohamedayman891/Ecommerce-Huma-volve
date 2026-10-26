@@ -11,6 +11,7 @@ class ProductsMapper {
     description: productDM.description ?? "",
     price: productDM.price ?? 0,
     slug: productDM.slug,
+    categoryName: productDM.category?.name,
   );
 
   List<Product> toEntities(List<ProductDM> products) =>

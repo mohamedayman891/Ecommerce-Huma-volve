@@ -58,4 +58,15 @@ class HomeRepositoryImpl extends HomeRepository {
       return FailureApiResult(ServerError());
     }
   }
+
+  @override
+  Future<ApiResult<Product>> getProductById(String id) async {
+    final result = await _remoteDataSource.getProductById(id);
+    if (result.isSuccess) {
+      final product = result.getData();
+      if (product == null) return FailureApiResult(ServerError());
+      return SuccessApiResult(data: _productsMapper.toEntity(product));
+    }
+    return FailureApiResult(result.getError() ?? ServerError());
+  }
 }

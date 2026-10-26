@@ -9,4 +9,5 @@ abstract class HomeRepository {
     required int offset,
     required int limit,
   });
+  Future<ApiResult<Product>> getProductById(String id);
 }

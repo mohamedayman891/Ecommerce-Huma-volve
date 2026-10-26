@@ -16,6 +16,9 @@ android {
 
     defaultConfig {
         applicationId = "com.example.ecommerce_app_huma_volve"
+        manifestPlaceholders["firebaseHostingDomain"] =
+            project.findProperty("firebaseHostingDomain") as String?
+                ?: "your-project-id.web.app"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

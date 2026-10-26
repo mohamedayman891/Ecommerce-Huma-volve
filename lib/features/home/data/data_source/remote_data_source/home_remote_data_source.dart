@@ -8,5 +8,6 @@ abstract class HomeRemoteDataSource {
     required int offset,
     required int limit,
   });
+  Future<ApiResult<ProductDM>> getProductById(String id);
   Future<ApiResult<List<CategoryDM>>> getCategories();
 }

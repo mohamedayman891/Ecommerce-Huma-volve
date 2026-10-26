@@ -27,6 +27,10 @@ abstract class ApiServices {
     @Query("offset") required int offset,
     @Query("limit") required int limit,
   });
+
+  @GET('products/{id}')
+  Future<ProductDM> getProductById(@Path('id') String id);
+
   @GET('categories')
   Future<List<CategoryDM>> getCategories();
 }
